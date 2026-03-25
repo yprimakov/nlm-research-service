@@ -25,8 +25,8 @@ import sys
 from pathlib import Path
 
 # Default VPS connection
-DEFAULT_HOST = os.environ.get("NLM_VPS_HOST", "your-vps-ip-here")
-DEFAULT_USER = os.environ.get("NLM_VPS_USER", "root")
+DEFAULT_HOST = os.environ.get("NLM_VPS_HOST", "100.77.129.29")
+DEFAULT_USER = os.environ.get("NLM_VPS_USER", "mr-prime")
 DEFAULT_CONTAINER = "nlm-service"
 
 # Local auth file location
