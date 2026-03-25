@@ -1,0 +1,29 @@
+services:
+  nlm:
+    build: .
+    container_name: nlm-service
+    restart: unless-stopped
+    ports:
+      - "3200:3200"
+    volumes:
+      - nlm-data:/data
+    environment:
+      - PORT=3200
+      - NLM_API_SECRET=${NLM_API_SECRET:-}
+      - NLM_STORAGE_PATH=/data/storage_state.json
+      - NLM_OUTPUT_DIR=/data/output
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nlm.rule=Host(`nlm.imadefire.com`)"
+      - "traefik.http.routers.nlm.entrypoints=websecure"
+      - "traefik.http.routers.nlm.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.nlm.loadbalancer.server.port=3200"
+    networks:
+      - root_default
+
+volumes:
+  nlm-data:
+
+networks:
+  root_default:
+    external: true
